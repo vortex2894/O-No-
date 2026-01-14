@@ -1,6 +1,8 @@
 /*
 1021. Remove Outermost Parentheses
 
+Link: https://leetcode.com/problems/remove-outermost-parentheses/description/
+
 A valid parentheses string is either empty "", "(" + A + ")", or A + B,
 where A and B are valid parentheses strings, and + represents string concatenation.
 
@@ -81,24 +83,24 @@ public:
             {
                 if (depth == 0) // вне любой примитивной части
                 {
-                    ++depth;
+                    ++depth; // Внешняя открывающая скобка - не добавляем
                 }
                 else
                 {
-                    ++depth;
-                    ans += ch;
+                    ++depth; // Внутренняя скобка
+                    ans += ch; // Добавляем в результат
                 }
             }
             else
             {
                 if (depth == 1) // на внешнем уровне примитивной части
                 {
-                    --depth;
+                    --depth; // Закрывающая внешняя скобка - не добавляем
                 }
                 else
                 {
-                    --depth;
-                    ans += ch;
+                    --depth; // Внутренняя скобка
+                    ans += ch; // Добавляем в результат
                 }
             }
         }
@@ -106,7 +108,7 @@ public:
     }
 };
 
-class TestFramework
+class TestRunner
 {
 public:
     static void runTests()
@@ -158,6 +160,6 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    TestFramework::runTests();
+    TestRunner::runTests();
     return 0;
 }
