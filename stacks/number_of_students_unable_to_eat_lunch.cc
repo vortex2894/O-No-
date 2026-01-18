@@ -78,7 +78,7 @@ public:
                 break;
             }
             --counts[sandwich];
-            remaining--;
+            --remaining;
         }
 
         return remaining;
