@@ -1,16 +1,17 @@
 /*
-94. Binary Tree Inorder Traversal
+144. Binary Tree Preorder Traversal
 
-Link: https://leetcode.com/problems/binary-tree-inorder-traversal/description
 
-Given the root of a binary tree, return the inorder traversal of its nodes' values.
+Link: https://leetcode.com/problems/binary-tree-preorder-traversal/description
+
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
 
 
 Example 1:
 
 Input: root = [1,null,2,3]
 
-Output: [1,3,2]
+Output: [1,2,3]
 
 Explanation: see the related figure.
 
@@ -18,7 +19,7 @@ Example 2:
 
 Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
 
-Output: [4,2,6,5,7,1,3,9,8]
+Output: [1,2,4,5,6,7,3,8,9]
 
 Explanation: see the related figure.
 
@@ -80,26 +81,25 @@ private:
      * Space complexity: O(n) in the worst case (skewed tree) due to recursion stack.
      *                   O(h) in the average case where h = height of tree, plus the output list.
      */
-    void inorder(TreeNode *node)
+    void preorder(TreeNode *node)
     {
-        if (!node)
+        if (node == nullptr)
         {
             return;
         }
-
-        inorder(node->left);
         values.push_back(node->val);
-        inorder(node->right);
+        preorder(node->left);
+        preorder(node->right);
     }
 
 public:
-    std::vector<int> inorderTraversal(TreeNode *root)
+    std::vector<int> preorderTraversal(TreeNode *root)
     {
         if (root == NULL)
         {
             return this->values;
         }
-        inorder(root);
+        preorder(root);
         return this->values;
     }
 };
@@ -126,13 +126,13 @@ int main()
 
     std::vector<int> v1 = {1, 2, 3};
 
-    std::vector<int> expected = {1, 3, 2};
+    std::vector<int> expected = {1, 2, 3};
 
     TreeNode *input = new TreeNode(v1[0]);
     input->right = new TreeNode(v1[1]);
     input->right->left = new TreeNode(v1[2]);
 
-    std::vector<int> res_vec = solver.inorderTraversal(input);
+    std::vector<int> res_vec = solver.preorderTraversal(input);
 
     bool pass1 = (res_vec == expected);
     std::cout << "Test 1: " << (pass1 ? "PASS" : "FAIL") << v1 << " → " << res_vec << "\n";
