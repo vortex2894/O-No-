@@ -1,16 +1,17 @@
 /*
-94. Binary Tree Inorder Traversal
+145. Binary Tree Postorder Traversal
 
-Link: https://leetcode.com/problems/binary-tree-inorder-traversal/description
 
-Given the root of a binary tree, return the inorder traversal of its nodes' values.
+Link: https://leetcode.com/problems/binary-tree-postorder-traversal/description
+
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
 
 
 Example 1:
 
 Input: root = [1,null,2,3]
 
-Output: [1,3,2]
+Output: [3,2,1]
 
 Explanation: see the related figure.
 
@@ -18,7 +19,7 @@ Example 2:
 
 Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
 
-Output: [4,2,6,5,7,1,3,9,8]
+Output: [4,6,7,5,2,9,8,3,1]
 
 Explanation: see the related figure.
 
@@ -74,34 +75,32 @@ private:
     std::vector<int> values;
 
     /*
-     * Preorder Traversal is a method to traverse a tree such that for each node, 
-     * you first visit the node itself, then traverse its left subtree, and finally traverse its right subtree.
-     *
+     * Postorder Traversal is a method to traverse a tree such that for each node, 
+     * you first traverse its left subtree, then its right subtree, and finally visit the node itself.
      * Time complexity:  O(n) — Every node is visited exactly once.
      *
      * Space complexity: O(n) in the worst case (skewed tree) due to recursion stack.
      *                   O(h) in the average case where h = height of tree, plus the output list.
      */
-    void inorder(TreeNode *node)
+    void postorder(TreeNode *node)
     {
-        if (!node)
+        if (node == nullptr)
         {
             return;
         }
-
-        inorder(node->left);
+        postorder(node->left);
+        postorder(node->right);
         values.push_back(node->val);
-        inorder(node->right);
     }
 
 public:
-    std::vector<int> inorderTraversal(TreeNode *root)
+    std::vector<int> postorderTraversal(TreeNode *root)
     {
         if (root == NULL)
         {
             return this->values;
         }
-        inorder(root);
+        postorder(root);
         return this->values;
     }
 };
@@ -128,13 +127,13 @@ int main()
 
     std::vector<int> v1 = {1, 2, 3};
 
-    std::vector<int> expected = {1, 3, 2};
+    std::vector<int> expected = {3, 2, 1};
 
     TreeNode *input = new TreeNode(v1[0]);
     input->right = new TreeNode(v1[1]);
     input->right->left = new TreeNode(v1[2]);
 
-    std::vector<int> res_vec = solver.inorderTraversal(input);
+    std::vector<int> res_vec = solver.postorderTraversal(input);
 
     bool pass1 = (res_vec == expected);
     std::cout << "Test 1: " << (pass1 ? "PASS" : "FAIL") << v1 << " → " << res_vec << "\n";
