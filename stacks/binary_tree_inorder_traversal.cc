@@ -72,11 +72,8 @@ class Solution
 public:
 private:
     std::vector<int> values;
-
     /*
-     * Preorder Traversal is a method to traverse a tree such that for each node, 
-     * you first visit the node itself, then traverse its left subtree, and finally traverse its right subtree.
-     *
+     * Inorder traversal means visiting a binary tree in the order Left → Root → Right.
      * Time complexity:  O(n) — Every node is visited exactly once.
      *
      * Space complexity: O(n) in the worst case (skewed tree) due to recursion stack.
@@ -138,7 +135,7 @@ int main()
 
     bool pass1 = (res_vec == expected);
     std::cout << "Test 1: " << (pass1 ? "PASS" : "FAIL") << v1 << " → " << res_vec << "\n";
-    
+
     TreeUtils::deleteTree(input);
     return 0;
 }
