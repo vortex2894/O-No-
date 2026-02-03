@@ -62,17 +62,22 @@ public:
     int minOperations(std::vector<std::string> &logs)
     {
         std::stack<std::string> st;
-        for (auto log : logs) {
-            if ((log == "../" && st.empty()) || log == "./") {
+        for (auto log : logs)
+        {
+            if ((log == "../" && st.empty()) || log == "./")
+            {
                 continue;
-            } else if (log == "../" && !st.empty()) {
+            }
+            else if (log == "../" && !st.empty())
+            {
                 st.pop();
-            } else {
+            }
+            else
+            {
                 st.push(log);
             }
         }
         return st.size();
-        
     }
 };
 
@@ -107,10 +112,9 @@ public:
         Solution solver;
 
         std::vector<TestCase> test_cases = {
-            {{"d1/","d2/","../","d21/","./"}, 2, "Test case 1"},
-            {{"d1/","d2/","./","d3/","../","d31/"}, 3, "Test case 2"},
-            {{"d1/","../","../","../"}, 0, "Test case 3"}
-        };
+            {{"d1/", "d2/", "../", "d21/", "./"}, 2, "Test case 1"},
+            {{"d1/", "d2/", "./", "d3/", "../", "d31/"}, 3, "Test case 2"},
+            {{"d1/", "../", "../", "../"}, 0, "Test case 3"}};
 
         int passed{0};
         auto total{test_cases.size()};
